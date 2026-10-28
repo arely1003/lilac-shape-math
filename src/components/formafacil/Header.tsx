@@ -33,7 +33,7 @@ export function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
         <a href="#inicio" className="focus-ring flex items-center gap-2 rounded-lg text-lg font-semibold text-foreground">
           <Logo />
-          FormaFácil
+          <span className="max-[420px]:sr-only">FormaFácil</span>
         </a>
         <nav aria-label="Principal" className="flex items-center gap-1 sm:gap-2">
           {links.map((l) => (

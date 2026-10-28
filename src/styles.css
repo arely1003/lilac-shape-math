@@ -97,6 +97,7 @@
 }
 
 .dark {
+  color-scheme: dark;
   --background: oklch(0.19 0.03 300);
   --foreground: oklch(0.95 0.02 300);
   --card: oklch(0.24 0.04 300);
@@ -141,8 +142,8 @@ body { font-family: var(--font-sans); transition: background-color .3s, color .3
 @utility bg-hero { background-image: var(--gradient-hero); }
 
 @utility card-soft {
-  background-color: var(--color-card);
-  border: 1px solid var(--color-border);
+  background-color: var(--card);
+  border: 1px solid var(--border);
   border-radius: calc(var(--radius) + 8px);
   box-shadow: var(--shadow-soft);
 }
