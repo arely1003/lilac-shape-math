@@ -59,16 +59,17 @@ export function calculate(shape: ShapeId, values: Values): CalcResult {
     else n[f.key] = v;
   }
   if (Object.keys(errors).length) return { ok: false, errors };
+  const g = (k: string): number => n[k] ?? 0;
 
   switch (shape) {
     case "cuadrado":
-      return { ok: true, area: n.lado * n.lado, perimeter: 4 * n.lado };
+      return { ok: true, area: g("lado") * g("lado"), perimeter: 4 * g("lado") };
     case "rectangulo":
-      return { ok: true, area: n.base * n.altura, perimeter: 2 * (n.base + n.altura) };
+      return { ok: true, area: g("base") * g("altura"), perimeter: 2 * (g("base") + g("altura")) };
     case "circulo":
-      return { ok: true, area: Math.PI * n.radio ** 2, perimeter: 2 * Math.PI * n.radio };
+      return { ok: true, area: Math.PI * g("radio") ** 2, perimeter: 2 * Math.PI * g("radio") };
     case "triangulo": {
-      const { a, b, c } = n;
+      const a = g("a"), b = g("b"), c = g("c");
       if (a + b <= c || a + c <= b || b + c <= a) {
         return {
           ok: false,
@@ -77,7 +78,7 @@ export function calculate(shape: ShapeId, values: Values): CalcResult {
             "Estos lados no forman un triángulo: la suma de dos lados siempre debe ser mayor que el tercero.",
         };
       }
-      return { ok: true, area: (n.base * n.altura) / 2, perimeter: a + b + c };
+      return { ok: true, area: (g("base") * g("altura")) / 2, perimeter: a + b + c };
     }
   }
 }
