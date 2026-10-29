@@ -21,13 +21,19 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const ORDER: ShapeId[] = ["cuadrado", "rectangulo", "triangulo", "circulo"];
+const ORDER: ShapeId[] = ["cuadrado", "rectangulo", "triangulo", "circulo", "rombo", "romboide", "trapecio", "pentagono", "hexagono", "elipse"];
 
 const FORMULAS: Record<ShapeId, { area: string; perimeter: string; note: string }> = {
   cuadrado: { area: "A = l × l = l²", perimeter: "P = 4 × l", note: "l es la longitud de un lado." },
   rectangulo: { area: "A = b × h", perimeter: "P = 2 × (b + h)", note: "b es la base y h la altura." },
   triangulo: { area: "A = (b × h) ÷ 2", perimeter: "P = a + b + c", note: "h es perpendicular a la base; a, b y c son sus lados." },
   circulo: { area: "A = π × r²", perimeter: "P = 2 × π × r", note: "r es el radio y π ≈ 3.1416." },
+  rombo: { area: "A = (D × d) ÷ 2", perimeter: "P = 4 × l", note: "D y d son las diagonales y l es un lado." },
+  romboide: { area: "A = b × h", perimeter: "P = 2 × (b + l)", note: "b es la base, h la altura y l el lado inclinado." },
+  trapecio: { area: "A = ((B + b) ÷ 2) × h", perimeter: "P = B + b + l₁ + l₂", note: "B y b son las bases, h la altura y l₁, l₂ los lados." },
+  pentagono: { area: "A ≈ 1.7205 × l²", perimeter: "P = 5 × l", note: "l es la longitud de un lado." },
+  hexagono: { area: "A ≈ 2.5981 × l²", perimeter: "P = 6 × l", note: "l es la longitud de un lado." },
+  elipse: { area: "A = π × a × b", perimeter: "P ≈ π × (3(a + b) − √((3a + b)(a + 3b)))", note: "a y b son los semiejes; el perímetro es una aproximación." },
 };
 
 const STEPS = ["Selecciona una figura.", "Ingresa las medidas.", "Selecciona la unidad.", "Presiona Calcular.", "Consulta los resultados."];

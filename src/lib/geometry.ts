@@ -1,4 +1,14 @@
-export type ShapeId = "cuadrado" | "rectangulo" | "triangulo" | "circulo";
+export type ShapeId =
+  | "cuadrado"
+  | "rectangulo"
+  | "triangulo"
+  | "circulo"
+  | "rombo"
+  | "romboide"
+  | "trapecio"
+  | "pentagono"
+  | "hexagono"
+  | "elipse";
 export type Unit = "cm" | "m" | "km";
 
 export interface Field {
@@ -36,6 +46,53 @@ export const SHAPES: Record<ShapeId, { name: string; description: string; fields
     name: "Círculo",
     description: "Todos sus puntos están a la misma distancia del centro.",
     fields: [{ key: "radio", label: "Radio", hint: "Distancia del centro al borde" }],
+  },
+  rombo: {
+    name: "Rombo",
+    description: "Cuatro lados iguales con diagonales que se cruzan en el centro.",
+    fields: [
+      { key: "diagonalMayor", label: "Diagonal mayor", hint: "La diagonal más larga" },
+      { key: "diagonalMenor", label: "Diagonal menor", hint: "La diagonal más corta" },
+      { key: "lado", label: "Lado", hint: "Longitud de cualquiera de sus lados" },
+    ],
+  },
+  romboide: {
+    name: "Romboide",
+    description: "Lados opuestos paralelos e iguales, como un rectángulo inclinado.",
+    fields: [
+      { key: "base", label: "Base", hint: "Lado horizontal" },
+      { key: "altura", label: "Altura", hint: "Distancia perpendicular entre las bases" },
+      { key: "lado", label: "Lado inclinado", hint: "Longitud de un lado lateral" },
+    ],
+  },
+  trapecio: {
+    name: "Trapecio",
+    description: "Cuatro lados con dos bases paralelas de distinto tamaño.",
+    fields: [
+      { key: "baseMayor", label: "Base mayor", hint: "La base paralela más larga" },
+      { key: "baseMenor", label: "Base menor", hint: "La base paralela más corta" },
+      { key: "altura", label: "Altura", hint: "Distancia perpendicular entre las bases" },
+      { key: "lado1", label: "Lado 1", hint: "Primer lado no paralelo" },
+      { key: "lado2", label: "Lado 2", hint: "Segundo lado no paralelo" },
+    ],
+  },
+  pentagono: {
+    name: "Pentágono regular",
+    description: "Cinco lados iguales y cinco ángulos iguales.",
+    fields: [{ key: "lado", label: "Lado", hint: "Longitud de cualquiera de sus lados" }],
+  },
+  hexagono: {
+    name: "Hexágono regular",
+    description: "Seis lados iguales y seis ángulos iguales.",
+    fields: [{ key: "lado", label: "Lado", hint: "Longitud de cualquiera de sus lados" }],
+  },
+  elipse: {
+    name: "Elipse",
+    description: "Como un círculo estirado, con un eje mayor y uno menor.",
+    fields: [
+      { key: "ejeMayor", label: "Semieje mayor", hint: "Mitad del eje más largo" },
+      { key: "ejeMenor", label: "Semieje menor", hint: "Mitad del eje más corto" },
+    ],
   },
 };
 
@@ -79,6 +136,30 @@ export function calculate(shape: ShapeId, values: Values): CalcResult {
         };
       }
       return { ok: true, area: (g("base") * g("altura")) / 2, perimeter: a + b + c };
+    }
+    case "rombo":
+      return { ok: true, area: (g("diagonalMayor") * g("diagonalMenor")) / 2, perimeter: 4 * g("lado") };
+    case "romboide":
+      return { ok: true, area: g("base") * g("altura"), perimeter: 2 * (g("base") + g("lado")) };
+    case "trapecio":
+      return {
+        ok: true,
+        area: ((g("baseMayor") + g("baseMenor")) / 2) * g("altura"),
+        perimeter: g("baseMayor") + g("baseMenor") + g("lado1") + g("lado2"),
+      };
+    case "pentagono": {
+      const l = g("lado");
+      return { ok: true, area: (5 * l * l) / (4 * Math.tan(Math.PI / 5)), perimeter: 5 * l };
+    }
+    case "hexagono": {
+      const l = g("lado");
+      return { ok: true, area: (3 * Math.sqrt(3) / 2) * l * l, perimeter: 6 * l };
+    }
+    case "elipse": {
+      const a = g("ejeMayor"), b = g("ejeMenor");
+      // Aproximación de Ramanujan para el perímetro de la elipse
+      const perimeter = Math.PI * (3 * (a + b) - Math.sqrt((3 * a + b) * (a + 3 * b)));
+      return { ok: true, area: Math.PI * a * b, perimeter };
     }
   }
 }
