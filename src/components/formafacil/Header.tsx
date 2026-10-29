@@ -40,9 +40,10 @@ export function Header() {
           onClick={toggle}
           aria-label={dark ? "Activar modo claro" : "Activar modo oscuro"}
           aria-pressed={dark}
-          className="focus-ring inline-flex size-11 shrink-0 items-center justify-center rounded-xl border border-border bg-card text-primary transition-colors hover:bg-secondary sm:order-last"
+          className="focus-ring inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-border bg-card px-3 text-primary transition-colors hover:bg-secondary sm:order-last"
         >
           {dark ? <Sun className="size-5" /> : <Moon className="size-5" />}
+          <span className="text-sm font-medium" aria-hidden="true">{dark ? "Claro" : "Oscuro"}</span>
         </button>
         <nav aria-label="Principal" className="col-span-2 grid grid-cols-3 gap-1 sm:ml-auto sm:flex sm:gap-2">
           {links.map((l) => (
