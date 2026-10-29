@@ -23,6 +23,32 @@ export function ShapeIllustration({ shape, className = "size-20" }: { shape: Sha
           <circle cx="50" cy="50" r="3" className="fill-shape-stroke" />
         </>
       )}
+      {shape === "rombo" && (
+        <>
+          <polygon points="50,12 82,50 50,88 18,50" {...common} />
+          <line x1="50" y1="12" x2="50" y2="88" className="stroke-shape-stroke" strokeWidth="2" strokeDasharray="4 4" />
+          <line x1="18" y1="50" x2="82" y2="50" className="stroke-shape-stroke" strokeWidth="2" strokeDasharray="4 4" />
+        </>
+      )}
+      {shape === "romboide" && (
+        <polygon points="28,24 90,24 72,76 10,76" {...common} />
+      )}
+      {shape === "trapecio" && (
+        <polygon points="32,26 68,26 88,76 12,76" {...common} />
+      )}
+      {shape === "pentagono" && (
+        <polygon points="50,14 88,42 73,84 27,84 12,42" {...common} />
+      )}
+      {shape === "hexagono" && (
+        <polygon points="50,12 83,31 83,69 50,88 17,69 17,31" {...common} />
+      )}
+      {shape === "elipse" && (
+        <>
+          <ellipse cx="50" cy="50" rx="40" ry="26" {...common} />
+          <line x1="50" y1="50" x2="90" y2="50" className="stroke-shape-stroke" strokeWidth="2" strokeDasharray="4 4" />
+          <circle cx="50" cy="50" r="3" className="fill-shape-stroke" />
+        </>
+      )}
     </svg>
   );
 }

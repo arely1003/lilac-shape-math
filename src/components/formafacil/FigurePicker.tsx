@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { ShapeIllustration } from "./ShapeIllustration";
 
-const ORDER: ShapeId[] = ["cuadrado", "rectangulo", "triangulo", "circulo"];
+const ORDER: ShapeId[] = ["cuadrado", "rectangulo", "triangulo", "circulo", "rombo", "romboide", "trapecio", "pentagono", "hexagono", "elipse"];
 
 interface Props {
   open: boolean;
