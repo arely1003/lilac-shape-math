@@ -4,6 +4,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { calculate, SHAPES, type CalcResult, type ShapeId, type Unit, type Values } from "@/lib/geometry";
 import { Header } from "@/components/formafacil/Header";
 import { Calculator } from "@/components/formafacil/Calculator";
+import { FigurePicker } from "@/components/formafacil/FigurePicker";
 import { Logo, ShapeIllustration } from "@/components/formafacil/ShapeIllustration";
 
 export const Route = createFileRoute("/")({
@@ -36,6 +37,7 @@ function Index() {
   const [values, setValues] = useState<Values>({});
   const [unit, setUnit] = useState<Unit>("cm");
   const [result, setResult] = useState<CalcResult | null>(null);
+  const [pickerOpen, setPickerOpen] = useState(false);
 
   const changeShape = (s: ShapeId) => {
     setShape(s);
@@ -117,6 +119,12 @@ function Index() {
               onUnit={setUnit}
               onCalculate={() => setResult(calculate(shape, values))}
               onClear={() => { setValues({}); setResult(null); }}
+              onOpenPicker={() => setPickerOpen(true)}
+            />
+            <FigurePicker
+              open={pickerOpen}
+              onOpenChange={setPickerOpen}
+              onPick={changeShape}
             />
 
             {/* Ejemplo */}
