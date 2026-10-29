@@ -104,6 +104,9 @@ export function Calculator(p: Props) {
           <button type="button" onClick={p.onClear} className="focus-ring inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-border bg-secondary px-6 py-3 font-semibold text-secondary-foreground transition-colors hover:bg-accent hover:border-primary/50">
             <Eraser className="size-5" aria-hidden="true" /> Limpiar
           </button>
+          <button type="button" onClick={p.onOpenPicker} className="focus-ring inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-primary/40 bg-secondary px-6 py-3 font-semibold text-primary transition-all hover:-translate-y-0.5 hover:bg-accent hover:shadow-lift min-[420px]:col-span-2 sm:col-span-1">
+            <WandSparkles className="size-5" aria-hidden="true" /> Ayúdame a elegir una figura
+          </button>
         </div>
       </form>
 
