@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { AlertCircle, Calculator as CalcIcon, Eraser } from "lucide-react";
+import { AlertCircle, Calculator as CalcIcon, Eraser, WandSparkles } from "lucide-react";
 import { SHAPES, formatNumber, type CalcResult, type ShapeId, type Unit, type Values } from "@/lib/geometry";
 import { ShapeIllustration } from "./ShapeIllustration";
 
@@ -13,6 +13,7 @@ interface Props {
   onUnit: (u: Unit) => void;
   onCalculate: () => void;
   onClear: () => void;
+  onOpenPicker: () => void;
 }
 
 const inputCls =
