@@ -119,6 +119,12 @@ function Index() {
               onUnit={setUnit}
               onCalculate={() => setResult(calculate(shape, values))}
               onClear={() => { setValues({}); setResult(null); }}
+              onOpenPicker={() => setPickerOpen(true)}
+            />
+            <FigurePicker
+              open={pickerOpen}
+              onOpenChange={setPickerOpen}
+              onPick={changeShape}
             />
 
             {/* Ejemplo */}
