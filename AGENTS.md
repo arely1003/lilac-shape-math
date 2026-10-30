@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep GitHub Pages builds conditional on `GITHUB_PAGES=true`, using static prerendering and repository-relative asset/router paths; normal Lovable builds must retain their server deployment.
+- The Pages workflow stages only TanStack's `dist/client` contents into `dist` before upload, so no server code is published as static assets.

@@ -246,6 +246,41 @@ Continue developing this project in the [Lovable editor](https://lovable.dev/pro
 
 ## Development
 
+## Publicar FormaFácil en GitHub Pages
+
+El proyecto utiliza Vite con TanStack Start. GitHub Pages sirve archivos estáticos,
+por lo que la compilación de Actions activa `GITHUB_PAGES=true`, configura
+`base: "/lilac-shape-math/"` y genera previamente el HTML de la página.
+La compilación habitual de Lovable no cambia.
+
+Archivos de publicación:
+
+- `vite.config.ts`: base condicional y generación estática de la página.
+- `.github/workflows/deploy.yml`: instala con `npm ci`, ejecuta las pruebas y
+  `npm run build`, coloca el contenido público de `dist/client` en `dist`
+  y publica esa carpeta mediante GitHub Actions.
+- `package-lock.json`: dependencias reproducibles para npm.
+- `src/router.tsx` y `src/routes/__root.tsx`: rutas y favicon respetan la base.
+
+Para activar la publicación en `arely1003/lilac-shape-math`:
+
+1. Confirma que estos cambios llegaron a la rama `main` del repositorio.
+2. Abre **Settings → Pages → Build and deployment → Source** y elige
+   **GitHub Actions** (no “Deploy from a branch”).
+3. Abre **Actions → Deploy FormaFácil to GitHub Pages → Run workflow**
+   y selecciona `main`. Los cambios posteriores en `main` también la ejecutan.
+4. Espera a que los trabajos `build` y `deploy` estén en verde.
+5. Visita **https://arely1003.github.io/lilac-shape-math/**.
+
+Si tu rama principal tiene otro nombre, cambia `branches: [main]` en el workflow.
+Si GitHub pide permisos, habilita Actions para el repositorio y autoriza el
+entorno `github-pages`. No necesitas una clave personal ni una rama `gh-pages`.
+
+La ejecución falla si la compilación falla o si falta el HTML generado;
+una ejecución verde en GitHub es la confirmación de la compilación y publicación.
+Tras publicar, prueba “Probar ejemplo” (25 cm² y 20 cm), el selector de figuras
+y el modo oscuro. No se han cambiado las fórmulas ni el diseño.
+
 Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
 
 ```sh
