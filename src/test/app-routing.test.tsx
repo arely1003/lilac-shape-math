@@ -15,7 +15,7 @@ describe("App routing", () => {
       context: { queryClient: new QueryClient() },
     });
 
-    const location = router.parseLocation();
+    const location = router.parseLocation(router.history.location);
     expect(location.pathname).toBe("/");
     expect(router.matchRoutes(location.pathname).at(-1)?.routeId).toBe("/");
     expect(router.buildLocation({ to: "/" }).publicHref).toBe("/lilac-shape-math/");

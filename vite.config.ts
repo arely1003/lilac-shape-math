@@ -11,7 +11,9 @@ const githubPages = process.env['GITHUB_PAGES'] === "true";
 
 export default defineConfig({
   vite: { base: githubPages ? "/lilac-shape-math/" : "/" },
-  ...(githubPages ? { nitro: false as const } : {}),
+  // A temporary Node server is needed only while prerendering in Actions.
+  // The workflow uploads dist/client only, not this server.
+  ...(githubPages ? { nitro: { preset: "node-server" } } : {}),
   tanstackStart: {
     ...(githubPages ? {
       pages: [{ path: "/" }],
