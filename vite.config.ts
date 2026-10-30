@@ -7,11 +7,11 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 // GitHub Pages is static hosting; keep Lovable's normal build unchanged.
-const githubPages = process.env.GITHUB_PAGES === "true";
+const githubPages = process.env['GITHUB_PAGES'] === "true";
 
 export default defineConfig({
   vite: { base: githubPages ? "/lilac-shape-math/" : "/" },
-  nitro: githubPages ? false : undefined,
+  ...(githubPages ? { nitro: false as const } : {}),
   tanstackStart: {
     ...(githubPages ? {
       pages: [{ path: "/" }],
