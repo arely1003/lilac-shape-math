@@ -1,4 +1,3 @@
-
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 const githubPages = process.env.GITHUB_PAGES === "true";
@@ -17,6 +16,9 @@ export default defineConfig({
     : {}),
 
   tanstackStart: {
+    server: {
+      entry: "server",
+    },
     ...(githubPages
       ? {
           pages: [{ path: "/" }],
