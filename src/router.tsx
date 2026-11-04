@@ -7,7 +7,9 @@ export const getRouter = () => {
 
   const router = createRouter({
     routeTree,
-    basepath: import.meta.env.BASE_URL,
+    // During prerendering Nitro requests "/", so the server router must not
+    // expect the GitHub Pages repository prefix. The browser still uses it.
+    basepath: typeof window === "undefined" ? "/" : import.meta.env.BASE_URL,
     context: { queryClient },
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
